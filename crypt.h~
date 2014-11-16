@@ -1,0 +1,23 @@
+#include <crypto++/aes.h>
+#include <cstring>
+
+using namespace std;
+using namespace CryptoPP;
+
+class CryptoAES
+{
+	public:
+		CryptoAES();
+		~CryptoAES();
+	
+		void encrypt(char [],char []);
+		void decrypt(char [],char []);
+		
+
+	private:
+		AESEncryption aesEncryptor;
+		AESDecryption aesDecryptor;	
+		
+		char aesKey[AES::DEFAULT_KEYLENGTH];
+		char xorBlock[AES::BLOCKSIZE];
+};
