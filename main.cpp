@@ -1,28 +1,21 @@
 #include <iostream>
-#include "crypt.h"
+#include "aes_ctr.h"
 
 int main()
 {
-	CryptoAES aes;
-	unsigned char usrInput[AES::BLOCKSIZE];
-	unsigned char cipherText[AES::BLOCKSIZE];
-	unsigned char plainText[AES::BLOCKSIZE];
+	string plainText = "This Program shows how to use ECB, CBC, CBC_CTS, CFB, OFB and CTR mode of AES in Crypto++.";  
+    string aesKey = "0123456789ABCDEF0123456789ABCDEF";//256bits, also can be 128 bits or 192bits  
+    string aesIV = "ABCDEF0123456789";//128 bits  
+    string  CTR_EncryptedText,CTR_DecryptedText;   
 
-	cout<<"Input something: ";
-	cin>>usrInput;
 
-	cout<<"User input: "<<usrInput<<endl;
+	 CTR_EncryptedText = CTR_AESEncryptStr(aesKey, aesIV, plainText.c_str());//CTR加密  
+        CTR_DecryptedText = CTR_AESDecryptStr(aesKey, aesIV, CTR_EncryptedText.c_str());//CTR解密 
 
-	cout<<"\n*********"<<endl;
-	aes.encrypt(usrInput,cipherText);
-	
-	cout<<"Cipher Text is: ";
-	for(int i=0;i<AES::BLOCKSIZE;i++)
-		cout<<(int)cipherText[i]<<" ";
-	cout<<"\n*********"<<endl;
-	
-	aes.decrypt(plainText,cipherText);
-	cout<<"Plain Text is: "<<plainText<<endl;
+	cout << "CTR测试"<< endl;  
+    cout << "原文：" << plainText << endl;  
+    cout << "密文：" << CTR_EncryptedText << endl;  
+    cout << "恢复明文：" << CTR_DecryptedText << endl << endl;  
 
 
 	return 0;
