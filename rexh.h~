@@ -1,0 +1,4 @@
+#include <regex.h>
+#include <cstring>
+
+int email_is_valid(char [256]);
